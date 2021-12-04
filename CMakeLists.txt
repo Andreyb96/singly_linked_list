@@ -11,4 +11,9 @@ file(GLOB SOURCES
 file(GLOB HEADERS
 	"include/*.h")
 
+include_directories("include/")
+
+enable_testing()
+add_subdirectory(test)
+
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
