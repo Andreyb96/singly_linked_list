@@ -1,7 +1,11 @@
 #include "gtest/gtest.h"
+#include "SinglyLinkedList.h"
 
 TEST(SingleLinkedList, SimpleTest)
 {
+	SinglyLinkedList list;
+	list.Size();
+	list.Add();
 	ASSERT_TRUE(true == true);
 }
 

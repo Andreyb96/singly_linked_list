@@ -3,7 +3,9 @@
 
 class SinglyLinkedList
 {
-
+public:
+	void Add();
+	int Size();
 };
 
 #endif // SINGLY_LINKED_LIST_H

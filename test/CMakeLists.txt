@@ -46,7 +46,12 @@ foreach(NAME ${LIB_NAMES_LIST})
 
 endforeach()
 
+find_library(SinglyLinkedList_LIBRARY
+		NAMES SinglyLinkedList
+		PATHS ${PARENT_SRC_DIR}/../build/${CMAKE_BUILD_TYPE}
+	)
+
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} ${GOOGLE_TEST_LIBS})
+target_link_libraries(${PROJECT_NAME} ${GOOGLE_TEST_LIBS} ${SinglyLinkedList_LIBRARY})
 
 gtest_add_tests(TARGET ${PROJECT_NAME})
