@@ -13,7 +13,4 @@ file(GLOB HEADERS
 
 include_directories("include/")
 
-enable_testing()
-add_subdirectory(test)
-
-add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
