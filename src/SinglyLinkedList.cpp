@@ -137,6 +137,28 @@ std::shared_ptr<Node> SinglyLinkedList::GetNode(int position)
 	return tmpNode;
 }
 
+void SinglyLinkedList::Clear()
+{
+	auto& prevNode = _head;
+	std::shared_ptr<Node> postNode = nullptr;
+	if (_size > 1)
+	{
+		postNode = NextNode(prevNode);
+	}
+
+	while (prevNode != nullptr)
+	{
+		prevNode->ptr = nullptr;
+		prevNode = postNode;
+		if (prevNode != nullptr)
+		{
+			postNode = NextNode(prevNode);
+		}
+	}
+
+	_size = 0;
+}
+
 std::shared_ptr<Node> SinglyLinkedList::NextNode(const std::shared_ptr<Node>& node)
 {
 	return node->ptr;

@@ -26,6 +26,7 @@ public:
 	std::shared_ptr<Node> GetNode(int position);
 
 	void PrintList();
+	void Clear();
 	
 	int Size();
 
