@@ -88,8 +88,31 @@ void SinglyLinkedList::PrintList()
 	for (auto i = 0; i < _size; i++)
 	{
 		auto node = GetNode(i);
-		std::cout << "Position: " << i << "; Value: " << node->value << std::endl;
+		std::cout << "Position: " << i << "; Value: " <<
+ node->value << std::endl;
 	}
+}
+
+std::shared_ptr<Node> SinglyLinkedList::Find(int value, ErrorCode& err)
+{
+	err = OK;
+	if (_size == 0)
+	{
+		err = EMPTY_LIST;
+		return nullptr;
+	}
+	auto node = _head;
+
+	while (node != nullptr)
+	{
+		if (node->value == value)
+		{
+			return node;
+		}
+		node = NextNode(node);
+	}
+
+	return node;
 }
 
 std::shared_ptr<Node> SinglyLinkedList::GetNode(int position)
