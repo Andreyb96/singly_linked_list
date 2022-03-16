@@ -20,7 +20,8 @@ class SinglyLinkedList
 public:
 	SinglyLinkedList();
 	void AddNode(int value, int position, ErrorCode& err);
-	std::shared_ptr<Node> GetNode(int position, ErrorCode& err);
+	void RemoveNode(int position, ErrorCode& err);
+	std::shared_ptr<Node> GetNode(int position);
 	std::shared_ptr<Node> NextNode(const std::shared_ptr<Node>& node);
 	int Size();
 private:

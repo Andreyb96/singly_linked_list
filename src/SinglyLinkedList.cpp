@@ -5,40 +5,90 @@ SinglyLinkedList::SinglyLinkedList()
 
 void SinglyLinkedList::AddNode(int value, int position, ErrorCode& err)
 {
-	if (position < 0 && position > _size - 1)
+	err = OK;
+
+	if (position < 0)
 	{
 		err = INVALID_INPUT_PARAM;
 		return;
 	}
 
-	auto& prevNode = GetNode(position - 1, err);
-	auto& postNode = GetNode(position, err);
+	if (position >= _size)
+	{
+		position = _size;
+	}
 
-	if (!prevNode)
+	auto& prevNode = GetNode(position - 1);
+	auto& postNode = GetNode(position);
+	auto newNode = std::make_shared<Node>(value);
+
+	if (prevNode == nullptr)
 	{
 		_head = std::make_shared<Node>(value);
+		_head->ptr = postNode;
 	}
+	else if (postNode == nullptr)
+	{
+		prevNode->ptr = newNode;
+	} 
 	else
 	{
-		auto newNode = std::make_shared<Node>(value);
 		prevNode->ptr = newNode;
 		newNode->ptr = postNode;
 	}
 	_size++;
 }
 
-std::shared_ptr<Node> SinglyLinkedList::GetNode(int position, ErrorCode& err)
+void SinglyLinkedList::RemoveNode(int position, ErrorCode& err)
 {
 	err = OK;
 	if (_size == 0)
 	{
 		err = EMPTY_LIST;
-		return nullptr;
+		return;
+	}
+
+	if (position < 0)
+	{
+		err = INVALID_INPUT_PARAM;
+		return;
 	}
 
 	if (position >= _size)
 	{
 		err = OUT_OF_BOUND;
+		return;
+	}
+
+	if (position == 0)
+	{
+		_head = GetNode(position + 1);
+	}
+	else if (position == _size - 1)
+	{
+		auto& prevNode = GetNode(position - 1);
+		prevNode->ptr = nullptr;
+	}
+	else
+	{
+		auto& prevNode = GetNode(position - 1);
+		auto& postNode = GetNode(position + 1);
+		prevNode->ptr = postNode;
+	}
+
+
+	_size--;
+}
+
+std::shared_ptr<Node> SinglyLinkedList::GetNode(int position)
+{
+	if (position < 0)
+	{
+		return nullptr;
+	}
+
+	if (position >= _size)
+	{
 		return nullptr;
 	}
 
