@@ -1,5 +1,7 @@
 #include "SinglyLinkedList.h"
 
+#include <iostream>
+
 SinglyLinkedList::SinglyLinkedList()
 {}
 
@@ -60,6 +62,7 @@ void SinglyLinkedList::RemoveNode(int position, ErrorCode& err)
 		return;
 	}
 
+
 	if (position == 0)
 	{
 		_head = GetNode(position + 1);
@@ -78,6 +81,15 @@ void SinglyLinkedList::RemoveNode(int position, ErrorCode& err)
 
 
 	_size--;
+}
+
+void SinglyLinkedList::PrintList()
+{
+	for (auto i = 0; i < _size; i++)
+	{
+		auto node = GetNode(i);
+		std::cout << "Position: " << i << "; Value: " << node->value << std::endl;
+	}
 }
 
 std::shared_ptr<Node> SinglyLinkedList::GetNode(int position)
