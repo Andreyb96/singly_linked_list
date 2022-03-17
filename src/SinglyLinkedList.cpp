@@ -115,6 +115,30 @@ std::shared_ptr<Node> SinglyLinkedList::Find(int value, ErrorCode& err)
 	return node;
 }
 
+int SinglyLinkedList::GetIndex(int value, ErrorCode& err)
+{
+	err = OK;
+	int idx = 0;
+	if (_size == 0)
+	{
+		err = EMPTY_LIST;
+		return -1;
+	}
+	auto node = _head;
+
+	while (node != nullptr)
+	{
+		if (node->value == value)
+		{
+			return idx;
+		}
+		node = NextNode(node);
+		idx++;
+	}
+
+	return -1;
+}
+
 std::shared_ptr<Node> SinglyLinkedList::GetNode(int position)
 {
 	if (position < 0)
