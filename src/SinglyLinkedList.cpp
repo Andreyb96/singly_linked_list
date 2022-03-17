@@ -50,22 +50,17 @@ void SinglyLinkedList::RemoveNode(int position, ErrorCode& err)
 		return;
 	}
 
-	if (position < 0)
+	if (position < 0 || position >= _size)
 	{
 		err = INVALID_INPUT_PARAM;
 		return;
 	}
 
-	if (position >= _size)
-	{
-		err = OUT_OF_BOUND;
-		return;
-	}
-
-
 	if (position == 0)
 	{
+		auto tmpNode = _head;
 		_head = GetNode(position + 1);
+		tmpNode->ptr = nullptr;
 	}
 	else if (position == _size - 1)
 	{
@@ -79,7 +74,6 @@ void SinglyLinkedList::RemoveNode(int position, ErrorCode& err)
 		prevNode->ptr = postNode;
 	}
 
-
 	_size--;
 }
 
@@ -88,8 +82,7 @@ void SinglyLinkedList::PrintList()
 	for (auto i = 0; i < _size; i++)
 	{
 		auto node = GetNode(i);
-		std::cout << "Position: " << i << "; Value: " <<
- node->value << std::endl;
+		std::cout << "Position: " << i << "; Value: " << node->value << std::endl;
 	}
 }
 

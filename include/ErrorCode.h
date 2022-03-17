@@ -5,8 +5,7 @@ enum ErrorCode : int
 {
 	OK = 0,
 	INVALID_INPUT_PARAM,
-	EMPTY_LIST,
-	OUT_OF_BOUND
+	EMPTY_LIST
 };
 
 #endif // ERROR_CODE_H

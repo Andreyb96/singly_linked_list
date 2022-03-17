@@ -7,10 +7,12 @@ int main()
 
 	{ // AddNode UT
 		SinglyLinkedList myList;
+		myList.AddNode(1, -1, err);
+		assert(err == INVALID_INPUT_PARAM);
+
 		myList.AddNode(1, 0, err);
 		assert(myList.GetNode(0)->value == 1);
 		assert(err == OK);
-		err = OK;
 		myList.AddNode(2, 1, err);
 		assert(myList.GetNode(1)->value == 2);
 		assert(err == OK);
@@ -50,12 +52,18 @@ int main()
 
 	{ // RemoveNode UT
 		SinglyLinkedList myList;
+		myList.RemoveNode(0, err);
+		assert(err == EMPTY_LIST);
+
 		for (auto i = 0; i < 10; i++)
 		{
 			myList.AddNode(i + 1, i, err);
 			assert(myList.Size() == i + 1);
 			assert(err == OK);
 		}
+
+		myList.RemoveNode(10, err);
+		assert(err == INVALID_INPUT_PARAM);
 
 		for (auto i = 9; i > -1; i--)
 		{
@@ -68,6 +76,10 @@ int main()
 
 	{ // Find UT
 		SinglyLinkedList myList;
+
+		myList.Find(0, err);
+		assert(err == EMPTY_LIST);
+
 		for (auto i = 0; i < 10; i++)
 		{
 			myList.AddNode(i + 1, i, err);
@@ -110,6 +122,8 @@ int main()
 		assert(err == OK);
 		assert(myList.GetIndex(15, err) == -1);
 		assert(err == OK);
+
+		myList.PrintList();
 		myList.Clear();
 	}
 
